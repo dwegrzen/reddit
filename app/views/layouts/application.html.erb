@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Reddit</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<div class="container-fluid">
+  <div class ="row">
+    <div class ="col-sm-6">
+      <div class="btn-group">
+      <%= link_to "New link", new_link_path, class: 'btn btn-primary btn'%>
+      </div>
+      <div class="btn-group">
+      <%= link_to "New user", new_user_path, class: 'btn btn-primary btn'%>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<%= yield %>
+
+</body>
+</html>
