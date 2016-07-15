@@ -1,0 +1,96 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Links</h1>
+<%= paginate @links %>
+
+<% @links.each do |link| %>
+<div class="container">
+  <div class="row linkmain">
+    <div class="col-sm-2 tnail">
+      <%= image_tag link.thumbnail, class: "pull-right img-rounded"%>
+    </div>
+    <div class="col-sm-1 vote">
+      <div class="row votesys">
+        <div class="col-sm-12">
+        <%= button_to upvote_path(link), method: :get, class: 'active btn btn-default btn-xs center-block' do%>
+        <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+        <% end %>
+        </div>
+        <div class="col-sm-12 text-center">
+        <%= link.votes %></div>
+        <div class="col-sm-12">
+          <%= button_to downvote_path(link), method: :get, class: 'active btn btn-default btn-xs center-block' do%>
+          <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-9 linkinfo">
+      <div class="row">
+        <div class="col-sm-12">
+          <h4><%= link_to link.title, linkvote_path(link) %></h4>
+        </div>
+        <div class="col-sm-5">
+          <div class="col-sm-6 text-right">
+            <h5><%= link.user.username %></h5>
+          </div>
+          <div class="col-sm-6 text-left">
+            <h5><small><%= link.created_at.strftime("%b %e, %l:%M %p")%></small></h5>
+          </div>
+          <div class="col-sm-12 buttondiv">
+            <div class="btn-group">
+              <%= button_to "Edit", edit_link_path(link), method: :get, class: 'btn btn-primary btn-xs'%>
+            </div>
+            <div class="btn-group">
+              <%= button_to "Delete", link_path(link), method: :delete, data: {confirm: "Are you sure?"},class: 'btn btn-danger btn-xs'%>
+            </div>
+            <div class="btn-group">
+              <%= button_to "Go to subreddit", edit_link_path(link), method: :get, class: 'btn btn-info btn-xs'%>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-7 summary">
+          <h5><%= link.summary %></h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
+
+
+
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>User</th>
+      <th>Hyperlink</th>
+      <th>Summary</th>
+      <th>Votes</th>
+      <th>Subreddit</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @links.each do |link| %>
+      <tr>
+        <td><%= link.title %></td>
+        <td><%= link.user_id %></td>
+        <td><%= link.hyperlink %></td>
+        <td><%= link.summary %></td>
+        <td><%= link.votes %></td>
+        <td><%= link.subreddit_id %></td>
+        <td><%= link_to 'Show', link %></td>
+        <td><%= link_to 'Edit', edit_link_path(link) %></td>
+        <td><%= link_to 'Destroy', link, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Link', new_link_path %>

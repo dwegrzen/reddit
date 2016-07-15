@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @link.title %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @link.user_id %>
+</p>
+
+<p>
+  <strong>Hyperlink:</strong>
+  <%= @link.hyperlink %>
+</p>
+
+<p>
+  <strong>Summary:</strong>
+  <%= @link.summary %>
+</p>
+
+<p>
+  <strong>Votes:</strong>
+  <%= @link.votes %>
+</p>
+
+<p>
+  <strong>Subreddit:</strong>
+  <%= @link.subreddit_id %>
+</p>
+
+<%= link_to 'Edit', edit_link_path(@link) %> |
+<%= link_to 'Back', links_path %>
