@@ -10,6 +10,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    @links = @user.links.order(votes: :desc).page(params[:page]).per(20)
   end
 
   # GET /users/new

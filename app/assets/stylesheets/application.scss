@@ -4,20 +4,39 @@
 @import 'users';
 @import 'subreddits';
 
+body {
+  padding-top: 50px;
+  background-color: #b1b1b1
+ }
+
 * {
-  border: 1px solid red;
+  // border: 1px solid red;
+}
+#brand{
+  width: 30px;
+  display: inline-block;
+  margin-right: 2px;
+}
+.hometitle h1{
+  border-bottom: 5px groove;
+}
+.fullpost{
+  border-top: 1px solid #dddddd;
+  margin-bottom: 10px;
+
 }
 .linkmain {
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
 }
 .linkinfo {
-  border: 2px solid #708cbb;
-  border-radius: 5px;
+  // border-left: :2px, bold;
+  // border-right:2px, bold;
+  // border: #708cbb ;
 }
 .tnail {
   padding-right: 0px;
+  margin-top: 5px;
 }
 .buttondiv {
   margin-bottom: 2px;
