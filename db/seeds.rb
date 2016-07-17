@@ -23,6 +23,7 @@ links = 473.times.map do
     summary: Faker::Hipster.sentences(2).join(" "),
     thumbnail: "https://unsplash.it/100/100/?image=#{rand(1000)}",
     hyperlink: "http://www.randomusefulwebsites.com/jump.php",
+    votes: rand(3000),
     subreddit: subreddits.sample
     )
 end

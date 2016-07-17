@@ -12,6 +12,7 @@ body {
 * {
   // border: 1px solid red;
 }
+
 #brand{
   width: 30px;
   display: inline-block;
@@ -22,6 +23,8 @@ body {
 }
 .fullpost{
   border-top: 1px solid #dddddd;
+  border-bottom: 1px solid #dddddd;
+  padding-bottom: 5px;
   margin-bottom: 10px;
 
 }

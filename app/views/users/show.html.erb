@@ -1,17 +1,17 @@
-<p id="notice"><%= notice %></p>
+<p id="notice"><span class="label label-info"><%= notice %></span></p>
 
 <div class="container">
   <h4>All links posted by:</h4>
     <p><strong>Username:</strong> <%= @user.username %></p>
-    <p>Total links: <%= @links.length %></p>
+    <p>Total links: <%= @links.length %> Total votes: <%= @user.links.sum("votes")%></p>
 </div>
 
 <div class="container">
 <%= paginate @links %>
 </div>
 
-<% @links.each do |link| %>
 <div class="container fullpost">
+<% @links.each do |link| %>
   <div class="row linkmain">
     <div class="col-sm-2 tnail">
       <%= image_tag link.thumbnail, class: "pull-right img-rounded"%>
@@ -49,7 +49,7 @@
               <%= button_to "Delete", link_path(link), method: :delete, data: {confirm: "Are you sure?"},class: 'btn btn-danger btn-xs'%>
             </div>
             <div class="btn-group">
-              <%= button_to "Go to subreddit", edit_link_path(link), method: :get, class: 'btn btn-info btn-xs'%>
+              <%= button_to "Go to subreddit", subreddit_path(link.subreddit), method: :get, class: 'btn btn-info btn-xs'%>
             </div>
           </div>
         </div>
@@ -59,14 +59,14 @@
       </div>
     </div>
   </div>
-</div>
 <% end %>
+</div>
 
 
 
 
 
-
-
+<div class="container text-center">
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
+</div>

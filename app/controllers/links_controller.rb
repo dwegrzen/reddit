@@ -49,7 +49,9 @@ class LinksController < ApplicationController
     @link = Link.new(link_params)
 
     respond_to do |format|
-      if @link.save
+      if Link.where("hyperlink = ?", params[:link][:hyperlink])
+        format.html { redirect_to Link.where("hyperlink = ?", params[:link][:hyperlink]).order(votes: :desc).first, notice: 'Link already exists, bringing to page.' }
+      elsif @link.save
         format.html { redirect_to @link, notice: 'Link was successfully created.' }
         format.json { render :show, status: :created, location: @link }
       else
