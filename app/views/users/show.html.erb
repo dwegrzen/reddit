@@ -1,9 +1,9 @@
 <p id="notice"><span class="label label-info"><%= notice %></span></p>
 
 <div class="container">
-  <h4>All links posted by:</h4>
+  <h4>All links posted by</h4>
     <p><strong>Username:</strong> <%= @user.username %></p>
-    <p>Total links: <%= @links.length %> Total votes: <%= @user.links.sum("votes")%></p>
+    <p>Total links: <%= @links.length %> Total votes: <%= @links.sum("votes")%></p>
 </div>
 
 <div class="container">
@@ -62,11 +62,8 @@
 <% end %>
 </div>
 
-
-
-
-
 <div class="container text-center">
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
 </div>
+<br>

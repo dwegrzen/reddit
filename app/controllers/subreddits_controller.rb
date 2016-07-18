@@ -1,5 +1,5 @@
 class SubredditsController < ApplicationController
-  before_action :set_subreddit, only: [:show, :edit, :update, :destroy]
+  before_action :set_subreddit, only: [:show, :edit, :update, :destroy, :nameview]
 
   # GET /subreddits
   # GET /subreddits.json
@@ -26,7 +26,6 @@ class SubredditsController < ApplicationController
   # POST /subreddits.json
   def create
     @subreddit = Subreddit.new(subreddit_params)
-
     respond_to do |format|
       if @subreddit.save
         format.html { redirect_to @subreddit, notice: 'Subreddit was successfully created.' }
@@ -65,7 +64,12 @@ class SubredditsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_subreddit
-      @subreddit = Subreddit.find(params[:id])
+      if Subreddit.find_by(name: params[:id])
+        @subreddit = Subreddit.find_by(name: params[:id])
+      else
+        @subreddit = Subreddit.find(params[:id])
+      end
+
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

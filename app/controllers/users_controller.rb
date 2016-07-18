@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :profile]
 
   # GET /users
   # GET /users.json
@@ -62,10 +62,20 @@ class UsersController < ApplicationController
     end
   end
 
+  # def profile
+  #   @links = @user.links.order(votes: :desc).page(params[:page]).per(20)
+  #   render :show
+  # end
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
-      @user = User.find(params[:id])
+      if User.find_by(username: params[:id])
+        @user = User.find_by(username: params[:id])
+      else
+        @user = User.find(params[:id])
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

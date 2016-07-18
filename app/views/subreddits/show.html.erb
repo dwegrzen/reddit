@@ -1,7 +1,7 @@
 <p id="notice"><span class="label label-info"><%= notice %></span></p>
 
 <div class="container text-center">
-<h1><strong><%= @subreddit.name%></strong></h1>
+<h1><strong><%= @subreddit.name%></strong><br><small>Total Links:<%= @subreddit.links.length %></small></h1>
 </div>
 
 
@@ -63,3 +63,4 @@
 <%= link_to 'Edit', edit_subreddit_path(@subreddit) %> |
 <%= link_to 'List', subreddits_path %>
 </div>
+<br>

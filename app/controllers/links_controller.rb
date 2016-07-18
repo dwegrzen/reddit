@@ -14,22 +14,19 @@ class LinksController < ApplicationController
 
   def linkvote
     set_link
-    @link.votes +=1
-    @link.save
+    @link.increment!("votes")
     redirect_to @link.hyperlink
   end
 
   def upvote
     set_link
-    @link.votes += 1
-    @link.save
+    @link.increment!("votes")
     redirect_to :back
   end
 
   def downvote
     set_link
-    @link.votes -= 1
-    @link.save
+    @link.decrement!("votes")
     redirect_to :back
   end
 
@@ -47,10 +44,11 @@ class LinksController < ApplicationController
   # POST /links.json
   def create
     @link = Link.new(link_params)
-
+    @match = Link.where("hyperlink = ?", params[:link][:hyperlink]).order(votes: :desc).first
     respond_to do |format|
-      if Link.where("hyperlink = ?", params[:link][:hyperlink])
-        format.html { redirect_to Link.where("hyperlink = ?", params[:link][:hyperlink]).order(votes: :desc).first, notice: 'Link already exists, bringing to page.' }
+      if @match
+        @match.increment!("votes")
+        format.html { redirect_to @match, notice: 'Link already exists, bringing to page.' }
       elsif @link.save
         format.html { redirect_to @link, notice: 'Link was successfully created.' }
         format.json { render :show, status: :created, location: @link }
@@ -84,6 +82,16 @@ class LinksController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def search
+    @searchparam = params[:search]
+    @links = []
+    @links += Link.where('title = ?', "%#{@searchparam}%")
+    @links += Link.where('summary = ?', "%#{@searchparam}%")
+    @links += User.where('username = ?', "%#{@searchparam}%")
+    @links.uniq!
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
