@@ -4,7 +4,7 @@ class SubredditsController < ApplicationController
   # GET /subreddits
   # GET /subreddits.json
   def index
-    @subreddits = Subreddit.all
+    @subreddits = Subreddit.all.order(name: :asc)
   end
 
   # GET /subreddits/1

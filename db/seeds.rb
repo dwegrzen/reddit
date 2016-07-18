@@ -12,7 +12,7 @@ end
 
 subreddits = 20.times.map do
     Subreddit.create!(
-    name: Faker::Book.title
+    name: Faker::Superhero.power
     )
 end
 
