@@ -4,7 +4,13 @@ class LinksController < ApplicationController
   # GET /links
   # GET /links.json
   def index
-    @links = Link.order(votes: :desc).page(params[:page]).per(20)
+    if params[:search]
+      @searchparam = params[:search]
+      @links = Link.where("title like ? or summary like ?", "%#{@searchparam}%", "%#{@searchparam}%").order(votes: :desc).page(params[:page]).per(20)
+      render :search
+    else
+      @links = Link.order(votes: :desc).page(params[:page]).per(20)
+    end
   end
 
   # GET /links/1
@@ -83,12 +89,11 @@ class LinksController < ApplicationController
     end
   end
 
-  def search
-    @searchparam = params[:search]
+  def search(param)
+    @searchparam = param
     @links = []
-    @links += Link.where('title = ?', "%#{@searchparam}%")
-    @links += Link.where('summary = ?', "%#{@searchparam}%")
-    @links += User.where('username = ?', "%#{@searchparam}%")
+    @links += Link.where('title like ?', "%#{@searchparam}%")
+    @links += Link.where('summary like ?', "%#{@searchparam}%")
     @links.uniq!
   end
 

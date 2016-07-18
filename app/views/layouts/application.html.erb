@@ -26,15 +26,16 @@
               </ul>
             </li>
           </ul>
-          <form action="/search/" class="navbar-form navbar-right" method="get">
-           <div class="form-group">
-             <input type="text" name="search" class="form-control" placeholder="Search">
-           </div>
-           <button type="submit" class="btn btn-secondary">Submit</button>
-         </form>
+          <%= form_tag links_path, class: 'navbar-form navbar-right', method: "get" do %>
+          <div class="form-group">
+          <%= text_field_tag :search, params[:search], placeholder: "Search", class: 'form-control' %>
+          </div>
+          <%= submit_tag "Submit", class: 'btn btn-secondary' %>
+          <% end %>
        </div>
     </div>
 </nav>
+
 <body>
 
 
