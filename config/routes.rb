@@ -12,9 +12,14 @@ Rails.application.routes.draw do
   get 'downvote/:id' => 'links#downvote', as: :downvote
   get 'upvote/:id' => 'links#upvote', as: :upvote
   get 'goto/:id' => 'links#linkvote', as: :linkvote
-  # get 'users/:username' => 'users#profile', as: :profile
-  get 'search/:search' => 'links#search', as: :searching
+  get 'login' => 'user_sessions#new'
+  post 'login' => 'user_sessions#create'
+  delete 'logout' => 'user_sessions#destroy'
+  get 'signup' => 'users#new'
   get ':id', :controller => 'subreddits', :action => 'show'
+
+  # get 'users/:username' => 'users#profile', as: :profile
+  # get 'search/:search' => 'links#search', as: :searching
   # get ':subredditname' => 'subreddits#nameview', as: :subredditnameview
 
   # Example of regular route:

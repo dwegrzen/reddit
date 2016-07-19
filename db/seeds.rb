@@ -6,8 +6,13 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-users = 50.times.map do
-  User.create!(username: Faker::Internet.user_name)
+users = 30.times.map do
+  User.create!(
+  username: Faker::Internet.user_name,
+  password: "password",
+  email: Faker::Internet.email,
+  bio: Faker::Lorem.sentence
+  )
 end
 
 subreddits = 20.times.map do
@@ -16,14 +21,22 @@ subreddits = 20.times.map do
     )
 end
 
-links = 473.times.map do
+links = 200.times.map do
   Link.create!(
     title: Faker::ChuckNorris.fact,
     user: users.sample,
     summary: Faker::Hipster.sentences(2).join(" "),
     thumbnail: "https://unsplash.it/100/100/?image=#{rand(1000)}",
     hyperlink: "http://www.randomusefulwebsites.com/jump.php",
-    votes: rand(3000),
     subreddit: subreddits.sample
     )
+end
+
+
+votes = 1000.times.map do
+  Vote.create!(
+  value: rand(0..1) * 2 - 1,
+  user: users.sample,
+  link: links.sample
+  )
 end

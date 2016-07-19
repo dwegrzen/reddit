@@ -8,7 +8,6 @@
       <%= f.association :user, collection: User.order('username ASC'), label_method: :username, value_method: :id, include_blank: false %>
       <%= f.input :hyperlink %>
       <%= f.input :summary %>
-      <%= f.input :votes %>
       <%= f.input :thumbnail %>
       <%= f.association :subreddit, collection: Subreddit.order('name ASC'), label_method: :name,  value_method: :id, include_blank: true %>
     </div>

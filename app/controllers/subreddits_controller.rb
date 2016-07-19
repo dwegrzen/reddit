@@ -10,7 +10,7 @@ class SubredditsController < ApplicationController
   # GET /subreddits/1
   # GET /subreddits/1.json
   def show
-    @links = @subreddit.links.order(votes: :desc).page(params[:page]).per(20)
+    @links = @subreddit.links.order(score: :desc).page(params[:page]).per(20)
   end
 
   # GET /subreddits/new

@@ -1,0 +1,27 @@
+
+<div class="container">
+<h4>History</h4>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @votes.each do |vote| %>
+      <tr>
+        <td><%= vote.link.title %></td>
+        <td><%= link_to 'Link', link_path(vote.link.id) %></td>
+        <% if vote.value == -1 %>
+        <td><%= "Thumbs Down" %></td>
+        <% else %>
+        <td><%= "Thumbs Up" %></td>
+        <%end%>
+        <td><%= vote.created_at.strftime("%b %e, %l:%M %p")%></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

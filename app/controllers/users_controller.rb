@@ -10,7 +10,8 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    @links = @user.links.order(votes: :desc).page(params[:page]).per(20)
+    @links = @user.links.order(score: :desc).page(params[:page]).per(20)
+    @votes = @user.votes.order(created_at: :desc)
   end
 
   # GET /users/new
@@ -57,15 +58,10 @@ class UsersController < ApplicationController
   def destroy
     @user.destroy
     respond_to do |format|
-      format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
+      format.html { redirect_to users_url, notice: 'User was successfully deleted.' }
       format.json { head :no_content }
     end
   end
-
-  # def profile
-  #   @links = @user.links.order(votes: :desc).page(params[:page]).per(20)
-  #   render :show
-  # end
 
 
   private
@@ -80,6 +76,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:username)
+      params.require(:user).permit(:username, :email, :bio, :password, :password_confirmation)
     end
 end

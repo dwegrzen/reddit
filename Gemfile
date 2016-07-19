@@ -28,8 +28,9 @@ gem 'simple_form'
 gem 'faker'
 gem 'kaminari'
 gem 'kaminari-bootstrap', '~> 3.0.1'
+gem 'validate_url'
 # Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '~> 3.1.7'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
