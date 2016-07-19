@@ -42,8 +42,16 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
+
     respond_to do |format|
-      if @user.update(user_params)
+      if params[:user][:password]
+        if @user.authenticate(params[:user][:oldpassword])
+          @user.update(user_params)
+          format.html { redirect_to @user, notice: 'User and password successfully updated.' }
+        else
+          format.html { render :edit, notice: 'User authentication error.' }
+        end
+      elsif @user.update(user_params)
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }
       else
@@ -76,6 +84,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:username, :email, :bio, :password, :password_confirmation)
+      params.require(:user).permit(:username, :email, :bio, :password, :password_confirmation,)
     end
 end
