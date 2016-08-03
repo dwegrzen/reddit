@@ -37,7 +37,7 @@ class LinksController < ApplicationController
       set_link
       @link.votes << Vote.new(value: 1, user: current_user)
       @link.update(score: @link.votes.sum(:value))
-      redirect_to :back
+      # redirect_to :back
     else
       respond_to do |format|
         format.html { redirect_to :login , notice: 'Please login to vote.' }
@@ -50,7 +50,7 @@ class LinksController < ApplicationController
       set_link
       @link.votes << Vote.new(value: -1, user: current_user)
       @link.update(score: @link.votes.sum(:value))
-      redirect_to :back
+      # redirect_to :back
     else
       respond_to do |format|
         format.html { redirect_to :login , notice: 'Please login to vote.' }

@@ -67,7 +67,7 @@ test:
 # the app. Read http://guides.rubyonrails.org/configuring.html#configuring-a-database
 # for a full rundown on how to provide these environment variables in a
 # production deployment.
-#
+
 # On Heroku and other platform providers, you may have a full connection URL
 # available as an environment variable. For example:
 #

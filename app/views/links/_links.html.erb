@@ -11,14 +11,14 @@
     <div class="col-sm-1 vote">
       <div class="row votesys">
         <div class="col-sm-12">
-        <%= button_to upvote_path(link), method: :get, class: 'active btn btn-default btn-xs center-block' do%>
+        <%= button_to upvote_path(link), method: :get, remote: true, class: 'active btn btn-default btn-xs center-block' do%>
         <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
         <% end %>
         </div>
-        <div class="col-sm-12 text-center">
+        <div class="col-sm-12 text-center" id="link-<%= link.id %>">
         <%= link.votes.sum(:value) %></div>
         <div class="col-sm-12">
-          <%= button_to downvote_path(link), method: :get, class: 'active btn btn-default btn-xs center-block' do%>
+          <%= button_to downvote_path(link), method: :get, remote: true, class: 'active btn btn-default btn-xs center-block' do%>
           <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
           <% end %>
         </div>
