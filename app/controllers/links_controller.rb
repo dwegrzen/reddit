@@ -75,7 +75,7 @@ class LinksController < ApplicationController
   # POST /links.json
   def create
     @link = Link.new(link_params)
-    @match = Link.where("hyperlink = ?", params[:link][:hyperlink]).order(votes: :desc).first
+    @match = Link.where("hyperlink = ?", params[:link][:hyperlink]).order(created_at: :desc).first
     respond_to do |format|
       if @match
         @match.increment!("votes")
