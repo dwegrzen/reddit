@@ -18,6 +18,9 @@ class LinksController < ApplicationController
   # GET /links/1
   # GET /links/1.json
   def show
+    @links = [@link]
+    @comment = Comment.new()
+    @comments = @link.comments
   end
 
   def linkvote

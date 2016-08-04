@@ -1,0 +1,16 @@
+
+<div class="container fullpost" id="maincomment">
+  <% @comments.each do |comment| %>
+  <div class="row">
+    <div class="col-sm-12" id="comment-<%=comment.id%>">
+      <blockquote>
+        <%=comment.body%>
+        <footer>
+          by <%=comment.user.username%> on <%=comment.created_at.strftime("%b %e, %l:%M %p")%>
+        <cite> <%= link_to "Permalink", link_comment_path(comment.link.id, comment) %></cite>
+        </footer>
+      </blockquote>
+    </div>
+  </div>
+  <% end %>
+</div>
