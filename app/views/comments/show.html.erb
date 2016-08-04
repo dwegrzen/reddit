@@ -1,3 +1,4 @@
+<h4 id="notice"><span class="label label-info"><%= notice %></span></h4>
 <div class="container fullpost">
   <div class="row linkmain">
     <div class="col-sm-2 tnail">
@@ -6,14 +7,14 @@
     <div class="col-sm-1 vote">
       <div class="row votesys">
         <div class="col-sm-12">
-        <%= button_to upvote_path(@link), method: :get, class: 'active btn btn-default btn-xs center-block' do%>
+        <%= button_to upvote_path(@link), method: :get, remote: true, class: 'active btn btn-default btn-xs center-block' do%>
         <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
         <% end %>
         </div>
-        <div class="col-sm-12 text-center">
-        <%= @link.score %></div>
+        <div class="col-sm-12 text-center" id="link-<%= @link.id %>">
+        <%= @link.votes.sum(:value) %></div>
         <div class="col-sm-12">
-          <%= button_to downvote_path(@link),method: :get, class: 'active btn btn-default btn-xs center-block' do%>
+          <%= button_to downvote_path(@link), method: :get, remote: true, class: 'active btn btn-default btn-xs center-block' do%>
           <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
           <% end %>
         </div>
@@ -26,7 +27,7 @@
         </div>
         <div class="col-sm-5">
           <div class="col-sm-12 text-right">
-            <h5><%= link_to @link.user.username, user_path(@link.user) %><small> @ <%= @link.created_at.strftime("%b %e, %l:%M %p")%></small></h5>
+            <h5><%= link_to @link.user.username, user_path(@link.user) %><small> @ <%= link_to @link.created_at.strftime("%b %e, %l:%M %p"), link_path(@link) %></small></h5>
           </div>
           <div class="col-sm-12 buttondiv text-right">
             <div class="btn-group">
@@ -47,3 +48,21 @@
     </div>
   </div>
 </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12" id="comment-<%=@comment.id%>">
+      <blockquote><%=@comment.body%></blockquote>
+      <small>by <%=@comment.user.username%> on <%=@comment.created_at.strftime("%b %e, %l:%M %p")%></small>
+      <em><%= link_to "Permalink", link_comment_path(@comment.link.id, @comment) %></em>
+
+    </div>
+  </div>
+</div>
+
+
+<div class="container text-center">
+<%= link_to 'Edit', edit_link_path(@link) %> |
+<%= link_to 'Back', links_path %>
+</div>
+<br>

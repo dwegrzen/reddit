@@ -11,18 +11,26 @@ class UserSessionsController < ApplicationController
     if @user
       if @user.authenticate(params[:loginuser][:password])
         session[:user_id] = @user.id
-        redirect_to :root
+        respond_to do |format|
+          format.html { redirect_to :root , notice: "Successfully logged in as #{@user.username}" }
+        end
       else
-        render :new
+        respond_to do |format|
+          format.html { redirect_to :back , notice: 'Invalid User or Password'}
+        end
       end
     else
-      render :new
+      respond_to do |format|
+        format.html { redirect_to :back , notice: 'Invalid User or Password'}
+      end
     end
   end
 
   def destroy
     session[:user_id] = nil
-    redirect_to :root
+    respond_to do |format|
+      format.html { redirect_to :root , notice: "Successfully logged out"}
+    end
   end
 
   private

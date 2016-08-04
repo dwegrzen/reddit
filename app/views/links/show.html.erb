@@ -1,6 +1,11 @@
 <h4 id="notice"><span class="label label-info"><%= notice %></span></h4>
 
-<%= render 'show' %>
+<%= render 'links' %>
+
+<%= render '/comments/form' %>
+
+<%= render '/comments/comments' %>
+
 
 <div class="container text-center">
 <%= link_to 'Edit', edit_link_path(@link) %> |
